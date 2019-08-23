@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 import Home from './Home';
 import Creatures from './Creatures';
 import CreatureDetails from './CreatureDetails';
@@ -13,17 +14,18 @@ export default class App extends Component {
   render() {
     return (
       <main className="App">
+        <Router>
         <header>
           <NavLink to="/unicorns" className="nav">Unicorns 🦄</NavLink>
           <NavLink to="/puppies" className="nav">Puppies 🐶</NavLink>
           <NavLink to="/sharks" className="nav">Sharks 🦈</NavLink>
           <NavLink to='/dolphins' className="nav">Dolphins 🐬</NavLink>
         </header>
-        <Route exact path='/' component={ Home } />
-        <Route exact path='/unicorns' render={ () => <Creatures data={unicornData} /> } />
-        <Route exact path='/puppies' render={ () => <Creatures data={puppyData}/> } />
-        <Route exact path='/sharks' render={ () => <Creatures data={sharkData}/> } />
-        <Route exact path='/dolphins' render={ () => <Creatures data={dolphinData} /> } />
+          <Route exact path='/' component={ Home } />
+          <Route exact path='/unicorns' render={ () => <Creatures data={unicornData} /> } />
+          <Route exact path='/puppies' render={ () => <Creatures data={puppyData}/> } />
+          <Route exact path='/sharks' render={ () => <Creatures data={sharkData}/> } />
+          <Route exact path='/dolphins' render={ () => <Creatures data={dolphinData} /> } />
 
         <Route path='/unicorns/:id' render={ ({ match }) => {
           const {id} = match.params;
@@ -42,7 +44,7 @@ export default class App extends Component {
           const creature = dolphinData.find(dolphin => dolphin.id == match.params.id);
           return <CreatureDetails {...creature}/>
         }} />
-
+        </Router>
       </main>
     );
   }
